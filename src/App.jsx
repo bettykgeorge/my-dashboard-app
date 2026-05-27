@@ -20,22 +20,17 @@ function App() {
     setLoading(true)
     console.log("API KEY:", import.meta.env.VITE_API_KEY)
   
-    fetch(`https://api.allorigins.win/raw?url=https://gnews.io/api/v4/search?q=${debouncedSearch || category}&lang=en&token=${import.meta.env.VITE_API_KEY}`)
-     .then((response) => response.json())
-     .then((data) => {
-        if (data.articles) {
-          setPosts(data.articles)
-        } else {
-           setPosts([])
-           console.error("API error:", data)
-        }
+    fetch(`https://hn.algolia.com/api/v1/search?query=${debouncedSearch || category}`)
+      .then((res) => res.json())
+      .then((data) => {
+         setPosts(data.hits || [])
+         setLoading(false)
+       })
+      .catch((err) => {
+        console.error(err)
         setLoading(false)
-     })
-     .catch((error) => {
-        console.error("Fetch error:", error)
-        setLoading(false)
-     })
-   }, [category, debouncedSearch])
+      })
+    }, [category, debouncedSearch])
 
   useEffect(() => {
     localStorage.setItem("category", category)
@@ -117,16 +112,18 @@ function App() {
           {loading && <p className="text-lg">Loading news...</p>}
           {!loading && Array.isArray(posts) && posts.map((post, index) => (
             <div key={index} className="bg-white shadow-md p-4 rounded mb-4">
-             <h3 className="font-bold">{post.title}</h3>
-             <p>{post.description}</p>
+             <h3 className="font-bold">{post.title || "No title"}</h3>
+             <p>{post.story_text || "No description available"}</p>
           
-             <a 
-               href={post.url} 
-               target="_blank" 
-               className="mt-2 inline-block bg-blue-500 text-white px-3 py-1 rounded mr-2"
-              >
-                Read More
-              </a>
+             {post.url && (
+               <a
+                 href={post.url}
+                  target="_blank"
+                  className="mt-2 inline-block bg-blue-500 text-white px-3 py-1 rounded mr-2"
+                >
+                 Read More
+                </a>
+              )}
              <button 
                 onClick={() => {
                   const alreadyExists = favorites.some(
