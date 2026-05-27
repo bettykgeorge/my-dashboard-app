@@ -23,10 +23,19 @@ function App() {
     fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&q=${debouncedSearch}&apiKey=${import.meta.env.VITE_API_KEY}`)
      .then((response) => response.json())
      .then((data) => {
-      setPosts(data.articles)
-      setLoading(false)
-    })
-  }, [category, debouncedSearch])
+        if (data.articles) {
+          setPosts(data.articles)
+        } else {
+           setPosts([])
+           console.error("API error:", data)
+        }
+        setLoading(false)
+     })
+     .catch((error) => {
+        console.error("Fetch error:", error)
+        setLoading(false)
+     })
+   }, [category, debouncedSearch])
 
   useEffect(() => {
     localStorage.setItem("category", category)
