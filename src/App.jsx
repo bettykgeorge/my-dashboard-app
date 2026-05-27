@@ -20,7 +20,7 @@ function App() {
     setLoading(true)
     console.log("API KEY:", import.meta.env.VITE_API_KEY)
   
-    fetch(`https://gnews.io/api/v4/search?q=${debouncedSearch || category}&lang=en&token=b3d9c86ea23ce67b6315803e7a471219`)
+    fetch(`https://gnews.io/api/v4/search?q=${debouncedSearch || category}&lang=en&token=${import.meta.env.VITE_API_KEY}`)
      .then((response) => response.json())
      .then((data) => {
         if (data.articles) {
