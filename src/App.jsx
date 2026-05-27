@@ -20,7 +20,7 @@ function App() {
     setLoading(true)
 
   
-    fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&q=${debouncedSearch}&apiKey=${import.meta.env.VITE_API_KEY}`)
+    fetch(`https://gnews.io/api/v4/search?q=${debouncedSearch || category}&lang=en&token=${import.meta.env.VITE_API_KEY}`)
      .then((response) => response.json())
      .then((data) => {
         if (data.articles) {
@@ -115,7 +115,7 @@ function App() {
           ))}
           {/* 🔹 Step 3: Show API data */}
           {loading && <p className="text-lg">Loading news...</p>}
-          {!loading && posts.map((post, index) => (
+          {!loading && Array.isArray(posts) && posts.map((post, index) => (
             <div key={index} className="bg-white shadow-md p-4 rounded mb-4">
              <h3 className="font-bold">{post.title}</h3>
              <p>{post.description}</p>
