@@ -20,7 +20,7 @@ function App() {
     setLoading(true)
 
   
-    fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&q=${debouncedSearch}&apiKey=eb6a6c6fee444f179807ce52d1e216a6`)
+    fetch(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&q=${debouncedSearch}&apiKey=${import.meta.env.VITE_API_KEY}`)
      .then((response) => response.json())
      .then((data) => {
       setPosts(data.articles)
