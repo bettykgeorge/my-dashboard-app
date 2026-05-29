@@ -115,10 +115,8 @@ npm run build
 ---
 
 ## 🖥️ Screenshots
-
-> *(Add screenshots here — drag and drop images into the GitHub editor to auto-upload)*
-
----
+<img width="1867" height="925" alt="Screenshot 2026-05-27 201804" src="https://github.com/user-attachments/assets/00ae44bf-a38a-46a0-a0dd-7e3ce729bfe3" />
+<img width="1872" height="935" alt="Screenshot 2026-05-27 201550" src="https://github.com/user-attachments/assets/0c201d14-7cf9-4a19-8376-9b293fd50a2c" />
 
 ## 🔮 Future Improvements
 
@@ -151,6 +149,5 @@ npm run build
 
 ## 📌 License
 
-This project is for academic and learning purposes.<img width="1867" height="925" alt="Screenshot 2026-05-27 201804" src="https://github.com/user-attachments/assets/00ae44bf-a38a-46a0-a0dd-7e3ce729bfe3" />
-<img width="1872" height="935" alt="Screenshot 2026-05-27 201550" src="https://github.com/user-attachments/assets/0c201d14-7cf9-4a19-8376-9b293fd50a2c" />
+This project is for academic and learning purposes.
 
